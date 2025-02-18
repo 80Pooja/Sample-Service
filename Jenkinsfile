@@ -3,7 +3,7 @@ pipeline {
 stages { 
   stage('example') {
     steps {
-      echo " welcome multi branch "
+      echo "welcome multi branch "
     }
   }
 }
