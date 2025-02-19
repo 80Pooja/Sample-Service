@@ -14,8 +14,8 @@ pipeline {
                 //sh "git clone https://github.com/80Pooja/Sample-Service.git"
                 //sh "cd Sample-Service"
                  checkoutcode()  
-            //}
-        //}
+            }
+        }
          stage('setupjava17') {
                           steps {
                                    //sh "whoami"
