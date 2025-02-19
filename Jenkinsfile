@@ -1,3 +1,5 @@
+@Library('java_demo_pipeline@main') _
+
 pipeline {
     agent { label 'slave4' }
     environment {
@@ -8,20 +10,38 @@ pipeline {
     stages {
         stage('Checkout') {             
             steps {
-                sh "rm -rf Sample-Service"
-                sh "git clone https://github.com/80Pooja/Sample-Service.git"
-                sh "cd Sample-Service"
+              //  sh "rm -rf Sample-Service"
+                //sh "git clone https://github.com/80Pooja/Sample-Service.git"
+                //sh "cd Sample-Service"
+                 checkoutcode()  
             }
         }
-        stage('Set up Environment') {
-            steps {
-                sh 'export export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))'            
-                sh 'export MAVEN_HOME=/usr/share/maven'           
+         stage('setupjava17') {
+                          steps {
+                                   //sh "whoami"
+                                   //echo "installing java 17"
+                                   //sh "sudo apt update"
+                                   //sh "sudo apt install -y openjdk-17-jdk"
+                                   setupjava('openjdk-17-jdk')
+                          }
+                 }
+      //  stage('Set up Environment') {
+        //    steps {
+          //      sh 'export export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))'            
+            //    sh 'export MAVEN_HOME=/usr/share/maven'           
             }
+        }
+stage('setupmaven') {
+                 steps {
+                         // echo "installing maveen "
+                          //sh "sudo apt install -y maven"
+                          setupjava('maven')
+                 }
         }
         stage('build') {             
             steps {               
-                sh "mvn clean package"
+               // sh "mvn clean package"
+                builtproject()
             }
         }
         stage('Upload Artifact') {
