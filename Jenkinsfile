@@ -25,12 +25,12 @@ pipeline {
                                    setupjava('openjdk-17-jdk')
                           }
                  }
-      //  stage('Set up Environment') {
-        //    steps {
-          //      sh 'export export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))'            
-            //    sh 'export MAVEN_HOME=/usr/share/maven'           
-          //  }
-        //}
+        stage('Set up Environment') {
+            steps {
+                sh 'export export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))'            
+             sh 'export MAVEN_HOME=/usr/share/maven'           
+            }
+        }
 stage('setupmaven') {
                  steps {
                          // echo "installing maveen "
